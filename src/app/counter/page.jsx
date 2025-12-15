@@ -5,9 +5,11 @@ import CounterDisplay from '@/components/CounterComponent/CounterDisplay'
 import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
+import {useTheme} from '@/contexts/ThemeContext'
 
 
 export default function CounterPage() {
+	const {theme} = useTheme()
 	const [count, setCount] = useState(0)
 	const [nama, setNama] = useState("Fulan")
 
@@ -21,8 +23,10 @@ export default function CounterPage() {
 		setNama("Tony")
 	}
 
+	let bgColor = theme === "light" ? `bg-gray-200` : `bg-gray-600`
+
 	return (
-		<main className='min-h-screen bg-gray-200 flex flex-col items-center justify-center'>
+		<main className={`min-h-screen ${bgColor} flex flex-col items-center justify-center`}>
 			<Container maxWidth="sm" className='text-center'>
 				<Typography variant='h3' component="h1" className='mb-6 font-bold text-gray-800'>
 					My Counter App
