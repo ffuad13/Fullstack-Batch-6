@@ -1,4 +1,8 @@
+"use client"
+
 import StudentCard from '@/components/StudentCard'
+import {useTheme} from '@/contexts/ThemeContext'
+
 
 const dataPeserta = [
   { id: 1, nama: "Faizul", role: "Fullstack Developer", statusAktif: true, score: 85, catatan: "Suka ngoding!" },
@@ -20,6 +24,9 @@ function fungsiBiasa() {
 }
 
 export default function HomePage() {
+	const { theme } = useTheme();
+
+
   let resultCard = []
 
   for (let i = 0; i < dataPeserta.length; i++) {
@@ -30,8 +37,10 @@ export default function HomePage() {
     )
   }
 
+  let bgColor = theme === "light" ? "bg-gray-200" : "bg-gray-600"
+
   return (
-    <main className="min-h-screen bg-gray-200 p-10">
+    <main className={`min-h-screen ${bgColor} p-10`}>
       <h1 className="text-4xl font-extrabold text-center mb-10 text-blue-800">Bootcamp Dashboard</h1>
       {resultCard}
       <TextKomponen pesan={fungsiBiasa()} pesan2={"Halo Bandung"}/>
