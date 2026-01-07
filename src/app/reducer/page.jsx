@@ -8,19 +8,21 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Paper from "@mui/material/Paper";
 import { initialState, reducer } from "@/libs/counterReducer";
 import useLocalStorage from "@/utils/useLocalStorage";
+import useAuthGuard from "@/hooks/useAuthGuard";
 
 export default function ReducerPage() {
-	const [savedState, setSavedState] = useLocalStorage("reducerState", initialState)
+  useAuthGuard();
+
+  const [savedState, setSavedState] = useLocalStorage("reducerState", initialState);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-	useEffect(() => {
-		dispatch({type: "setAll", payload: savedState})
-	}, [])
+  useEffect(() => {
+    dispatch({ type: "setAll", payload: savedState });
+  }, []);
 
-	useEffect(() => {
-		setSavedState(state)
-	}, [state, setSavedState])
-
+  useEffect(() => {
+    setSavedState(state);
+  }, [state, setSavedState]);
 
   return (
     <div

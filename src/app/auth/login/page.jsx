@@ -4,8 +4,12 @@
 import { useRef, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 
 export default function LoginPage() {
+  const router = useRouter()
   const emailRef = useRef();
   const passwordRef = useRef();
   const [loading, setLoading] = useState(false);
@@ -40,6 +44,9 @@ export default function LoginPage() {
 
       localStorage.setItem('token', data.token)
       setSuccess(`${data.message}. Selamat datang ${data.data.fullname}`)
+      setTimeout(()=> {
+        router.push("/")
+      }, 2000)
     } catch (error) {
       setError(error.message);
     } finally {
@@ -58,6 +65,12 @@ export default function LoginPage() {
       <Button type="submit" variant="contained" color="primary" className="w-full" disabled={loading}>
         {loading ? "Loggiing in..." : "Login"}
       </Button>
+      <p className="text-black text-center">
+        Belum memiliki akun?
+        <Link href={`/auth/register`} passHref>
+          <span className="text-blue-400"> Register disini.</span>
+        </Link>
+      </p>
     </form>
   );
 }

@@ -8,9 +8,12 @@ import Typography from "@mui/material/Typography";
 import { useTheme } from "@/contexts/ThemeContext";
 import Link from "next/link";
 import {useRouter} from 'next/navigation'
+import useAuthGuard from '@/hooks/useAuthGuard'
 
 
 export default function CounterPage() {
+  useAuthGuard()
+
 	const router = useRouter()
   const { theme } = useTheme();
   const [count, setCount] = useState(0);
